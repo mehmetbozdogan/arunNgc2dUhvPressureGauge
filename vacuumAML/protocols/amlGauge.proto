@@ -1,0 +1,124 @@
+# amlGauge.proto
+# Proto file for the AML NGC2D Gauce Controller
+# Mehmet Bozdogan 10/11/2017
+#
+################################################################################
+OutTerminator = CR LF;
+ReadTimeout = 100;
+WriteTimeout = 100;
+PollPeriod = 100;
+ReplyTimeout = 1000;
+LockTimeout = 5000;
+ExtraInput = Ignore;
+
+
+
+getStatus
+{
+	out "*S0";
+	wait 200;
+	in	"%(\$1:STAT)0r"
+		"%(\$1:ERR)0r"
+		"%(\$1:RELAYS)0r"
+		"%*3r"
+		"%(\$1:SLCTDIG){1|5}"
+		"%(\$1:IGSTAT)0r"
+		"%(\$1:IGERR)0r"
+		"%*7r"
+		","
+		"%(\$1:IGUNIT){T|P|M}"
+		"0"
+		"%*5r"
+		"%(\$1:P1STAT)0r"
+		"%(\$1:P1ERR)0r"
+		"%*7r"
+		","
+		"%(\$1:P1UNIT){T|P|M}"
+		"0"
+		"%*5r"
+		"%(\$1:P2STAT)0r"
+		"%(\$1:P2ERR)0r"
+		"%*7r"
+		","
+		"%(\$1:P2UNIT){T|P|M}"
+		"0"
+		"%*5r"
+		"%(\$1:MSTAT)0r"
+		"%(\$1:MERR)0r"
+		"%*7r"
+		","
+		"%(\$1:MUNIT){T|P|M}"
+		"0"
+		"%*2r"
+		"1"
+		"%(\$1:BAKETEMP)d"
+		"C";
+}
+
+getPresIG
+{
+	in "%*9r"
+	   "%e"
+	   ","
+	   "%*s";
+}
+
+getPresP1
+{
+	in "%*26r"
+	   "%e"
+	   ","
+	   "%*s";
+}
+
+getPresP2
+{
+	in "%*43r"
+	   "%e"
+	   ","
+	   "%*s";
+}
+
+getPresM
+{
+	in "%*60r"
+	   "%e"
+	   ","
+	   "%*s";	
+}
+
+setRelay
+{
+	out "%{*I0\$1|*O0\$1}";
+}
+
+setCtrlMode
+{
+	out "%{*R0|*C0}";
+}
+
+resetErrors
+{
+	out "*E0";
+}
+
+gaugeSelect
+{
+	out "%{*j01|*j02}";
+}
+
+setBakeCycle
+{
+	out "%{*b00|*b01}";
+}
+
+IgStop
+{
+	out "*o0";
+}
+
+IgStart
+{
+	emission = "%(\$1:IGEMISSION)d";
+	out "*i0" $emission;
+}

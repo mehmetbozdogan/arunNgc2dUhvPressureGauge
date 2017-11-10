@@ -1,0 +1,17 @@
+# vacuum.substitutions
+# substitutions AML NGC2D Gauce Controller
+# Mehmet Bozdogan 10/11/2017
+#
+# substitutions:
+# sys    - system
+# sec    - section
+# dev    - device
+# PORT   - device port
+#
+#
+################################################################################
+file db/amlGauge.template {
+    	pattern 
+	{ sys	sec	dev	PORT	    }
+        { SYS	SEC	AML	SYS-SEC-AML }
+}

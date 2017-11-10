@@ -1,0 +1,210 @@
+# amlGauge.template
+# Template database AML NGC2D Gauce Controller
+# Mehmet Bozdogan 10/11/2017
+#
+# substitutions:
+# sys    - system
+# sec    - section
+# dev    - device
+# PORT   - device port
+#
+#
+################################################################################
+record(stringin, "$(sys)-$(sec)-$(dev):STATUS") 
+{
+	field(INP, "@amlGauge.proto getStatus($(sys)-$(sec)-$(dev)) $(PORT)")
+	field(DTYP, "stream")
+	field(SCAN, "1 second")
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):STAT") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):ERR") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):RELAYS") 
+{
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):SLCTDIG")
+{
+	field(DESC, "Selecter Gauge")
+	field(ZRVL, "1")
+	field(ZRST, "Ion Gauge 1")
+	field(ONVL, "5")
+	field(ONST, "Ion Gauge 2")
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):IGSTAT") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):IGERR") 
+{
+}
+record(ai, "$(sys)-$(sec)-$(dev):IGPRES") 
+{
+	field(INP, "@amlGauge.proto getPresIG $(PORT)")
+	field(DTYP, "stream")
+	field(SCAN, "I/O Intr")
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):IGUNIT") 
+{
+	field(DESC, "Selecter Gauge")
+	field(ZRVL, "T")
+	field(ZRST, "Torr")
+	field(ONVL, "P")
+	field(ONST, "Pascal")
+	field(TWVL, "M")
+	field(TWST, "mBar")
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):P1STAT") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):P1ERR") 
+{
+}
+record(ai, "$(sys)-$(sec)-$(dev):P1PRES") 
+{
+	field(INP, "@amlGauge.proto getPresP1 $(PORT)")
+	field(DTYP, "stream")
+	field(SCAN, "I/O Intr")
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):P1UNIT") 
+{
+	field(DESC, "Selecter Gauge")
+	field(ZRVL, "T")
+	field(ZRST, "Torr")
+	field(ONVL, "P")
+	field(ONST, "Pascal")
+	field(TWVL, "M")
+	field(TWST, "mBar")
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):P2STAT") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):P2ERR") 
+{
+}
+record(ai, "$(sys)-$(sec)-$(dev):P2PRES") 
+{
+	field(INP, "@amlGauge.proto getPresP2 $(PORT)")
+	field(DTYP, "stream")
+	field(SCAN, "I/O Intr")
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):P2UNIT") 
+{
+	field(DESC, "Selecter Gauge")
+	field(ZRVL, "T")
+	field(ZRST, "Torr")
+	field(ONVL, "P")
+	field(ONST, "Pascal")
+	field(TWVL, "M")
+	field(TWST, "mBar")
+}
+
+record(mbbi, "$(sys)-$(sec)-$(dev):MSTAT") 
+{
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):MERR") 
+{
+}
+record(ai, "$(sys)-$(sec)-$(dev):MPRES") 
+{
+	field(INP, "@amlGauge.proto getPresM $(PORT)")
+	field(DTYP, "stream")
+	field(SCAN, "I/O Intr")
+}
+record(mbbi, "$(sys)-$(sec)-$(dev):MUNIT") 
+{
+	field(DESC, "Selecter Gauge")
+	field(ZRVL, "T")
+	field(ZRST, "Torr")
+	field(ONVL, "P")
+	field(ONST, "Pascal")
+	field(TWVL, "M")
+	field(TWST, "mBar")
+}
+record(longin, "$(sys)-$(sec)-$(dev):BAKETEMP") 
+{
+	field(EGU, "C")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):RELAYA") 
+{
+	field(OUT, "@amlGauge.proto setRelay(A) $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Off")
+	field(ONAM, "On")
+}
+record(bo, "$(sys)-$(sec)-$(dev):RELAYB") 
+{
+	field(OUT, "@amlGauge.proto setRelay(B) $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Off")
+	field(ONAM, "On")
+}
+record(bo, "$(sys)-$(sec)-$(dev):RELAYC") 
+{
+	field(OUT, "@amlGauge.proto setRelay(C) $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Off")
+	field(ONAM, "On")
+}
+record(bo, "$(sys)-$(sec)-$(dev):RELAYD") 
+{
+	field(OUT, "@amlGauge.proto setRelay(D) $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Off")
+	field(ONAM, "On")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):CTRLMODE") 
+{
+	field(OUT, "@amlGauge.proto setCtrlMode $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Local Control")
+	field(ONAM, "Remote Control")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):RSTERR") 
+{
+	field(OUT, "@amlGauge.proto resetErrors $(PORT)")
+	field(DTYP, "stream")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):IGSELECT") 
+{
+	field(OUT, "@amlGauge.proto gaugeSelect $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Gauge1")
+	field(ONAM, "Gauge2")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):BAKECYCLE") 
+{
+	field(OUT, "@amlGauge.proto setBakeCycle $(PORT)")
+	field(DTYP, "stream")
+	field(ZNAM, "Stop")
+	field(ONAM, "Start")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):IGEMISSION") 
+{
+	field(ZNAM, "0.5")
+	field(ONAM, "5")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):START") 
+{
+	field(OUT, "@amlGauge.proto IgStart($(sys)-$(sec)-$(dev)) $(PORT)")
+	field(DTYP, "stream")
+}
+
+record(bo, "$(sys)-$(sec)-$(dev):STOP") 
+{
+	field(OUT, "@amlGauge.proto IgStop $(PORT)")
+	field(DTYP, "stream")
+}
