@@ -29,4 +29,3 @@
 <p><a href="https://github.com/mehmetbozdogan/arunNgc2dUhvPressureGauge/blob/master/Documentation/OpiScreenshot.jpg" target="_blank"><img src="https://github.com/mehmetbozdogan/arunNgc2dUhvPressureGauge/blob/master/Documentation/OpiScreenshot.jpg" alt="Screen for CSS" style="max-width:100%;"></a></p>
 
 On behalf of <a href=http://www.tarla.org.tr>TARLA</a>
-
